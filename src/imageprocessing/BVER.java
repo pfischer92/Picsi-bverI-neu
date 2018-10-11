@@ -33,11 +33,9 @@ public class BVER {
 		m_menuItems.add(new ImageMenuItem("Channel B\tCtrl+3",SWT.CTRL | '3', new ChannelRGB(2)));
 		m_menuItems.add(new ImageMenuItem("C&ropping\tCtrl+R",SWT.CTRL | 'R', new Cropping()));
 		m_menuItems.add(new ImageMenuItem("Debayering\tCtrl+4",SWT.CTRL | '4', new Debayering()));
-		m_menuItems.add(new ImageMenuItem("Debayering_Mac\tCtrl+5",SWT.CTRL | '5', new Debayering_Mac()));
-		m_menuItems.add(new ImageMenuItem("Debayering_sol\tCtrl+6",SWT.CTRL | '6', new Debayering_sol()));
-		m_menuItems.add(new ImageMenuItem("Linear Histogram Comp\tCtrl+7",SWT.CTRL | '7', new LinearHistogramCompensation()));
-		m_menuItems.add(new ImageMenuItem("Modified Gamma Corection\tCtrl+6",SWT.CTRL | '8', new ModifiedGammaCorr()));
-		m_menuItems.add(new ImageMenuItem("Modified Inverted Gamma Corection\tCtrl+6",SWT.CTRL | '8', new ModifiedInvertedGammaCorr()));
+		m_menuItems.add(new ImageMenuItem("Linear Histogram Comp\tCtrl+5",SWT.CTRL | '5', new LinearHistogramCompensation()));
+		m_menuItems.add(new ImageMenuItem("Modified Gamma Corection\tCtrl+6",SWT.CTRL | '6', new ModifiedGammaCorr()));
+		m_menuItems.add(new ImageMenuItem("Modified Inverted Gamma Corection\tCtrl+7",SWT.CTRL | '7', new ModifiedInvertedGammaCorr()));
 
 		// TODO add here further image processing entries (they are inserted into the BVER menu)
 	}
