@@ -155,17 +155,15 @@ public class ImageProcessing {
 		return true;
 	}
 	/**
-	 * Apply a lookup table
+	 * Apply lookup table lut on image data inData
+	 * @param inData
+	 * @param lut
 	 */
-	public static ImageData applyLUT(ImageData inData, byte[] lUT) {
+	public static void applyLUT(ImageData inData, byte[] lut) {
+		byte[] data = inData.data;
 
-		for(int v = 0; v < inData.width; v++) {
-			for(int u = 0; u < inData.height; u++) {
-				int i = inData.getPixel(u, v);
-				inData.setPixel(u, v, lUT[i]);
-			}
-		}
-		return inData;
+		//for (int i=0; i < data.length; i++) data[i] = lut[0xFF & data[i]];
+		Parallel.For(0, data.length, i -> data[i] = lut[0xFF & data[i]]);
 	}
 }
 
