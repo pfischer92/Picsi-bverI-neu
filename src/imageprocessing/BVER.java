@@ -35,7 +35,8 @@ public class BVER {
 		m_menuItems.add(new ImageMenuItem("Debayering\tCtrl+4",SWT.CTRL | '4', new Debayering()));
 		m_menuItems.add(new ImageMenuItem("Histogram Equalization\tCtrl+5",SWT.CTRL | '5', new HistogramEqualization()));
 		m_menuItems.add(new ImageMenuItem("Gamma Corection\tCtrl+6",SWT.CTRL | '6', new GammaCorrection()));
-		m_menuItems.add(new ImageMenuItem("sRGBtoYUV\tCtrl+8",SWT.CTRL | '8', new sRGBtoYUV()));
+		m_menuItems.add(new ImageMenuItem("sRGBtoYUV\tCtrl+7",SWT.CTRL | '7', new sRGBtoYUV()));
+		m_menuItems.add(new ImageMenuItem("Gewichteter Median-Filter\tCtrl+8",SWT.CTRL | '8', new GewichtMedianFilter()));
 
 		// TODO add here further image processing entries (they are inserted into the BVER menu)
 	}

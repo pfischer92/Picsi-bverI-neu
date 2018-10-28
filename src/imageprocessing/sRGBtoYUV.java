@@ -4,7 +4,6 @@ import main.Picsi;
 import org.eclipse.swt.graphics.ImageData;
 
 import static imageprocessing.ImageProcessing.clamp8;
-import static imageprocessing.ModifiedGammaCorr.modGammaCorr;
 
 public class sRGBtoYUV implements IImageProcessor {
 	private static double diffOldNewRed = 0, diffOldNewGreen = 0, diffOldNewBlue = 0;
