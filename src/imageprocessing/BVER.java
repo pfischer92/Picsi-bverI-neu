@@ -38,6 +38,7 @@ public class BVER {
 		m_menuItems.add(new ImageMenuItem("sRGBtoYUV\tCtrl+7",SWT.CTRL | '7', new sRGBtoYUV()));
 		m_menuItems.add(new ImageMenuItem("Gewichteter Median-Filter\tCtrl+8",SWT.CTRL | '8', new GewichtMedianFilter()));
         m_menuItems.add(new ImageMenuItem("Binarization\tCtrl+9",SWT.CTRL | '9', new Binarization()));
+        m_menuItems.add(new ImageMenuItem("Morphologic Filter\tCtrl+10",SWT.CTRL | '0', new MorphologicFilter()));
 
 
         // TODO add here further image processing entries (they are inserted into the BVER menu)
