@@ -24,6 +24,11 @@ public class Grauwertbild implements IImageProcessor
         int ch = JOptionPane.showOptionDialog(null, "Choose the output", "Convert to gray", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,null, outputTypes, outputTypes[0]);
         if(ch < 0) return null;
 
+        return createGreyScale(inData, imageType, ch);
+
+    }
+
+    public static ImageData createGreyScale(ImageData inData, int imageType, int ch){
         // create palette and output image data
         RGB[] rgbs = new RGB[256];
         for (int i = 0; i< 256; i++) rgbs[i] = new RGB(i,i,i);
@@ -52,4 +57,5 @@ public class Grauwertbild implements IImageProcessor
             return null;
         }
     }
+
 }
