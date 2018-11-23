@@ -29,10 +29,12 @@ public class GewichtMedianFilter implements IImageProcessor {
 
     public static void applyWeigthMedianFilter(ImageData imData, int[][]weights, int hotSpotX, int hotSpotY ){
         int gewSum = 0, val, pos = 0, x, y;
+        final int fh = weights.length;
+        final int fw = weights[0].length;
 
         // Summe der Gewichte ermittlen
-        for (int i = 0; i < weights.length; i++){
-            for (int j = 0; j < weights[0].length; j++){
+        for (int i = 0; i < fh; i++){
+            for (int j = 0; j < fw; j++){
                 gewSum += weights[i][j];
             }
         }
@@ -42,19 +44,20 @@ public class GewichtMedianFilter implements IImageProcessor {
         // Filter anwenden
         for(int u = 0; u < imData.height; u++){
             for (int v = 0; v < imData.width; v++){
-                for (int n = 0; n < weights.length; n++){
-                    for (int m = 0; m < weights[0].length; m++){
+                pos = 0;
+                for (int j = 0; j < fh; j++){
+                    for (int i = 0; i < fw; i++){
 
                         // Randbehandlung
-                        x = u + n -hotSpotX;
-                        y = v + m - hotSpotY;
+                        x = u + i -hotSpotX;
+                        y = v + j - hotSpotY;
                         if (x < 0) x = -x;
                         if (x >= imData.width) x = 2*imData.width -1 -x;
                         if(y < 0) y = -y;
                         if(y >= imData.height) y = 2*imData.height - 1 -y;
 
                         // Intensität zwischenspeichern
-                        for (int k = 0; k < weights[n][m]; k++){
+                        for (int k = 0; k < weights[j][i]; k++){
                             values[pos] = imData.getPixel(x,y);
                             pos++;
                         }
