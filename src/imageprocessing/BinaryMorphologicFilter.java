@@ -13,7 +13,7 @@ import utils.Parallel;
  * @author Christoph Stamm
  *
  */
-public class MorphologicFilter implements IImageProcessor {
+public class BinaryMorphologicFilter implements IImageProcessor {
 	public static int s_background = 0; // white
 	public static int s_foreground = 1; // black
 	public static boolean[][] s_circle3 = new boolean[][] {{ false, true, false},{true, true, true},{false, true, false}};
@@ -134,13 +134,13 @@ public class MorphologicFilter implements IImageProcessor {
 	 * @return new dilated binary image
 	 */
 	public static ImageData dilation(ImageData inData, boolean[][] struct, int cx, int cy) {
-		assert Picsi.determineImageType(inData) == Picsi.IMAGE_TYPE_BINARY || Picsi.determineImageType(inData) == Picsi.IMAGE_TYPE_GRAY;
-		
-		ImageData outData = new ImageData(inData.width, inData.height, inData.depth, inData.palette); // new Data is initialized with 0
+        assert Picsi.determineImageType(inData) == Picsi.IMAGE_TYPE_BINARY || Picsi.determineImageType(inData) == Picsi.IMAGE_TYPE_GRAY;
+
+        ImageData outData = (ImageData)inData.clone();
 
         Parallel.For(0, outData.height, v -> {
             for (int u=0; u < outData.width; u++) {
-                boolean set = false;
+                boolean set = true;
 
                 for (int j=0; set && j < struct.length; j++) {
                     final int v0 = v + j - cy;
@@ -149,8 +149,8 @@ public class MorphologicFilter implements IImageProcessor {
                         for (int i=0; set && i < struct[j].length; i++) {
                             final int u0 = u + i - cx;
 
-                            if (u0 < 0 || u0 >= inData.width || (struct[j][i] && inData.getPixel(u0, v0) != s_foreground)) {
-                                set = true;
+                            if (u0 < 0 || u0 >= inData.width || (struct[j][i] && inData.getPixel(u0, v0) != s_background)) {
+                                set = false;
                             }
                         }
                     } else {

@@ -94,7 +94,6 @@ public class Binarization implements IImageProcessor {
                 threshold = t;
             }
         }
-        System.out.println("Threshold: " + threshold);
         return threshold;
     }
 
