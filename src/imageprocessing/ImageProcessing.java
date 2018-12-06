@@ -1,5 +1,7 @@
 package imageprocessing;
 
+import main.Picsi;
+import org.eclipse.swt.graphics.RGB;
 import utils.Parallel;
 
 import org.eclipse.swt.SWT;
@@ -21,8 +23,51 @@ public class ImageProcessing {
 	 * @return double-array of length 1 or 3 containing the separate PSNR of each channel
 	 */
 	public static double[] psnr(ImageData inData1, ImageData inData2, int imageType) {
-		// TODO
-		return null;
+		final int size = inData1.width*inData1.height;
+		final int len = (imageType == Picsi.IMAGE_TYPE_INDEXED || imageType == Picsi.IMAGE_TYPE_RGB) ? 3 : 1;
+		double[] PSNR = new double[len];
+
+		Parallel.For(0, inData1.height, PSNR,
+				// creator
+				() -> new double[len],
+				// loop body
+				(v, psnr) -> {
+					for (int u=0; u < inData1.width; u++) {
+						final int pixel1 = inData1.getPixel(u, v);
+						final int pixel2 = inData2.getPixel(u, v);
+						if (len == 1) {
+							psnr[0] = (pixel2 - pixel1)*(pixel2 - pixel1);
+						} else {
+							RGB rgb1 = inData1.palette.getRGB(pixel1);
+							RGB rgb2 = inData2.palette.getRGB(pixel2);
+							psnr[0] += (rgb2.red - rgb1.red)*(rgb2.red - rgb1.red);
+							psnr[1] += (rgb2.green - rgb1.green)*(rgb2.green - rgb1.green);
+							psnr[2] += (rgb2.blue - rgb1.blue)*(rgb2.blue - rgb1.blue);
+						}
+					}
+				},
+				// reducer
+				psnr -> {
+					for(int i=0; i < psnr.length; i++) PSNR[i] += psnr[i];
+				}
+		);
+		for(int i=0; i < PSNR.length; i++) PSNR[i] = 20*Math.log10(255/Math.sqrt(PSNR[i]/size));
+		return PSNR;
+	}
+
+	/**
+	 * Clamp to range [-128,127]
+	 * @param d
+	 * @return
+	 */
+	public static int signedClamp8(double d) {
+		if (d < -128) {
+			return -128;
+		} else if (d > 127) {
+			return 127;
+		} else {
+			return (int)Math.round(d);
+		}
 	}
 	
 	/**

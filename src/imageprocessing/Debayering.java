@@ -25,7 +25,7 @@ public class Debayering implements IImageProcessor {
 
 	@Override
 	public ImageData run(ImageData inData, int imageType) {
-		Object[] outputTypes = { "Simple", "Good" };
+		Object[] outputTypes = { "Own", "Simple", "Good" };
 		int ch = OptionPane.showOptionDialog("Debayering algorithms", SWT.ICON_QUESTION, outputTypes, 0);
 		if (ch < 0) return null;
 
@@ -37,15 +37,92 @@ public class Debayering implements IImageProcessor {
 		ImageData outData = new ImageData(inData.width, inData.height, Bypp*8, pd);
 		
 		// Debayering of raw input image
-		if (ch == 0) debayering1(inData, outData);
+		if (ch == 0) debayeringOwn(inData, outData);
+		else if(ch == 1)debayering1(inData, outData);
 		else debayering2(inData, outData);
+
 		
 		return outData;
 	}
 
-	/**
-	 * ToDo: Debayering
-	 */
+	private void debayeringOwn(ImageData inData, ImageData outData) {
+		Parallel.For(0, outData.height, v -> {
+		RGB rgb = new RGB(0, 0, 0);
+			for (int u=0; u < outData.width; u++) {
+
+				int value = inData.getPixel(u, v);
+
+				// Filter edge cases
+				if(u == outData.width - 1 || v == outData.height - 1) {
+					rgb = inData.palette.getRGB(value);
+				}
+				else {
+					// Apply 2x2 interpolation to pixel
+					rgb = inData.palette.getRGB(value); // rgb val is equal for each channel
+
+					// Check for actual bayering mask color
+
+					// Case Blue
+					if(u%2 == 0 && v%2 ==0) {
+						// blue stays
+
+						// Green val from Pixel at u+1 and v+1 divied by 2 (right shift)
+						int rightNeighbour = inData.getPixel(u+1, v);
+						int bottomNeighbour = inData.getPixel(u, v+1);
+
+						int interpolatedGreen = (rightNeighbour + bottomNeighbour) >> 1;
+
+						// Red val from Pixel at u+1 v+1
+						int redNeighbour = inData.getPixel(u+1, v+1);
+
+						// Set new RGB to Pixel
+						rgb.red = redNeighbour;
+						rgb.green = interpolatedGreen;
+					}
+
+					// Case Red
+					else if(u%2 == 1 && v%2 == 1) {
+						// red stays
+
+						// Green val from Pixel at u+1 and v+1 divided by 2 (right shift)
+						int rightNeighbour = inData.getPixel(u+1, v);
+						int bottomNeighbour = inData.getPixel(u, v+1);
+
+						int interpolatedGreen = (rightNeighbour + bottomNeighbour) >> 1;
+
+						// Blue val from Pixel at u+1 v+1
+						int blueNeighbour = inData.getPixel(u+1, v+1);
+
+						// Set new RGB to Pixel
+						rgb.green = interpolatedGreen;
+						rgb.blue = blueNeighbour;
+					}
+
+					// Case Green
+					else {
+						// Green val from actual Pixel and from Pixel at u+1 v+1 divided by 2 (right shift)
+						int greenNeighbour = inData.getPixel(u+1, v+1);
+						int interpolatedGreen = (rgb.green + greenNeighbour) >> 1;
+
+						// Red val from Pixel at v+1
+						int redNeighbour = inData.getPixel(u, v+1);
+
+						// Blue val from Pixel at v+1
+						int blueNeighbour = inData.getPixel(u+1, v);
+
+						// Set new RGB to Pixel
+						rgb.red = redNeighbour;
+						rgb.green = interpolatedGreen;
+						rgb.blue = blueNeighbour;
+					}
+				}
+
+				// write rgb to output pixel
+				outData.setPixel(u, v, outData.palette.getPixel(rgb));
+			}
+			});
+	}
+
 	private void debayering1(ImageData inData, ImageData outData) {
 		Parallel.For(0, outData.height, v -> {
 			final int vm1 = Math.abs(v - 1);
@@ -106,8 +183,7 @@ public class Debayering implements IImageProcessor {
 						int b4 = inData.getPixel(up1, vp1);
 						rgb.blue = (b1 + b2 + b3 + b4) >> 2;
 					}
-				}	
-
+				}
 				outData.setPixel(u, v, outData.palette.getPixel(rgb));
 			}
 		});
@@ -117,7 +193,7 @@ public class Debayering implements IImageProcessor {
 		// interpolation of green channel
 		Parallel.For(0, outData.height, v -> {
 			RGB rgb = new RGB(0, 0, 0);
-			
+
 			for (int u=0; u < outData.width; u++) {
 				final int um1 = Math.abs(u - 1);
 				final int um2 = Math.abs(u - 2);

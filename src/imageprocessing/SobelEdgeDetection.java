@@ -36,5 +36,6 @@ public class SobelEdgeDetection implements IImageProcessor{
         }
 
         return outData;
+
     }
 }

@@ -29,7 +29,7 @@ public class sRGBtoYUV implements IImageProcessor {
 		System.out.println("PSNR for BLUE channel: " + psnrBlue);
 		return outData;
 	}
-	
+
 	/**
 	 * Invert image data
 	 * @param imageData will be modified
