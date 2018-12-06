@@ -37,8 +37,12 @@ public class BVER {
 		m_menuItems.add(new ImageMenuItem("Gamma Corection\tCtrl+6",SWT.CTRL | '6', new GammaCorrection()));
 		m_menuItems.add(new ImageMenuItem("sRGBtoYUV(own)\tCtrl+7",SWT.CTRL | '7', new sRGBtoYUV()));
 		m_menuItems.add(new ImageMenuItem("RGBtoYUV\tCtrl+h",SWT.CTRL | 'h', new RGBtoYUV()));
+		m_menuItems.add(new ImageMenuItem("GaussianFilter\tCtrl+j",SWT.CTRL | 'j', new GaussianFilter()));
+		m_menuItems.add(new ImageMenuItem("MedianFilter\tCtrl+n",SWT.CTRL | 'n', new MedianFilter()));
 		m_menuItems.add(new ImageMenuItem("Gewichteter Median-Filter\tCtrl+8",SWT.CTRL | '8', new GewichtMedianFilter()));
+		m_menuItems.add(new ImageMenuItem("EdgeDetectionBVER\tCtrl+i",SWT.CTRL | 'i', new EdgeDetectionBVER()));
         m_menuItems.add(new ImageMenuItem("SobelEdgeDetection\tCtrl+9",SWT.CTRL | '9', new SobelEdgeDetection()));
+		m_menuItems.add(new ImageMenuItem("RGBtoHSV\tCtrl+k",SWT.CTRL | 'k', new RGBtoHSV()));
         m_menuItems.add(new ImageMenuItem("Binarization\tCtrl+10",SWT.CTRL | '0', new Binarization()));
         m_menuItems.add(new ImageMenuItem("Binary Morphologic Filter\tCtrl+m",SWT.CTRL | 'm', new BinaryMorphologicFilter()));
         m_menuItems.add(new ImageMenuItem("Greyscale Morphologic Filter\tCtrl+g",SWT.CTRL | 'g', new GreyMorphologicFilter()));
