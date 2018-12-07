@@ -47,6 +47,7 @@ public class BVER {
         m_menuItems.add(new ImageMenuItem("MorphologicFilter\tCtrl+d",SWT.CTRL | 'd', new MorphologicFilter()));
         m_menuItems.add(new ImageMenuItem("Binary Morphologic Filter\tCtrl+m",SWT.CTRL | 'm', new BinaryMorphologicFilter()));
         m_menuItems.add(new ImageMenuItem("Greyscale Morphologic Filter\tCtrl+g",SWT.CTRL | 'g', new GreyMorphologicFilter()));
+        m_menuItems.add(new ImageMenuItem("DFT\tCtrl+d",SWT.CTRL | 'd', new DFT()));
 
 
         // TODO add here further image processing entries (they are inserted into the BVER menu)

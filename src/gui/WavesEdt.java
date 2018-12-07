@@ -1,5 +1,6 @@
 package gui;
 
+import imageprocessing.HistogramEqualization;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.*;
@@ -508,7 +509,7 @@ public class WavesEdt extends Dialog {
 			outData = m_transformed;
 			if (m_equalizedBtn.getSelection()) {
 				outData = (ImageData)outData.clone();
-				// TODO: call histogram equalization for outData
+                HistogramEqualization.equalization(outData);
 			}
 			views.showImageInSecondView(outData);
 			m_disableUpdate = false;
