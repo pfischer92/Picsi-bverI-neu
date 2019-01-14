@@ -20,6 +20,7 @@ public class TwinView extends Composite {
 	private View m_view1, m_view2;
 	private ColorTableDlg m_colorTable;
 	private HistogramDlg m_histogram;
+	private LineViewer m_lineViewer;
 	private WavesEdt m_wavesEditor;
 	private boolean m_autoZoom = true;
 	private boolean m_synchronized = false;
@@ -82,6 +83,10 @@ public class TwinView extends Composite {
 				m_histogram.close();
 				m_histogram = null;
 			}
+			if (m_lineViewer != null) {
+				m_lineViewer.close();
+				m_lineViewer = null;
+			}
 			if (m_wavesEditor != null) {
 				m_wavesEditor.close();
 				m_wavesEditor = null;
@@ -92,6 +97,9 @@ public class TwinView extends Composite {
 			}
 			if (m_histogram != null) {
 				m_histogram.update(false, this);
+			}
+			if (m_lineViewer != null) {
+				m_lineViewer.update(false, this);
 			}
 			split();
 		}
@@ -117,6 +125,10 @@ public class TwinView extends Composite {
 	
 	public boolean hasHistogram() {
 		return m_histogram != null;
+	}
+	
+	public boolean hasLineViewer() {
+		return m_lineViewer != null;
 	}
 	
 	public boolean hasWaves() {
@@ -206,6 +218,7 @@ public class TwinView extends Composite {
 		if (!resize) {
 			if (m_colorTable != null) m_colorTable.update(hasSecondView(), this); 
 			if (m_histogram != null) m_histogram.update(hasSecondView(), this); 
+			if (m_lineViewer != null) m_lineViewer.update(hasSecondView(), this); 
 			if (m_wavesEditor != null) {
 		    	Shell shell = getShell();
 		    	
@@ -312,6 +325,25 @@ public class TwinView extends Composite {
 		if (m_histogram != null) {
 			m_histogram.close();
 			m_histogram = null;
+		}		
+	}
+
+	public void toggleLineViewer() {
+		if (m_lineViewer != null) {
+			// close line viewer
+			m_lineViewer.close();
+			m_lineViewer = null;
+		} else {
+			// open histogram
+			m_lineViewer = new LineViewer(getShell());
+			m_lineViewer.open(this);
+		}
+	}
+	
+	public void closeLineViewer() {
+		if (m_lineViewer != null) {
+			m_lineViewer.close();
+			m_lineViewer = null;
 		}		
 	}
 

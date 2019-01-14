@@ -153,9 +153,19 @@ public class Editor extends JFrame {
 				m_textPane.write(new FileWriter(m_path));
 				
 				// read header of written file and check validity
-				if (! new PNM().checkHeader(m_path)) {
-					JOptionPane.showMessageDialog(this, "Invalid header.\nHeader has to be a valid PBM, PGM, or PPM image header (ASCII format).", "Error", JOptionPane.ERROR_MESSAGE);
+				int retValue = new PNM().checkHeader(m_path);
+				if (retValue < 0) {
+					if (retValue == -1)
+						JOptionPane.showMessageDialog(this, "Invalid header.\nHeader has to be a valid PBM, PGM, or PPM image header (ASCII format).", "Error", JOptionPane.ERROR_MESSAGE);
+					else
+						JOptionPane.showMessageDialog(this, "Invalid or unknown image creator tag.", "Error", JOptionPane.ERROR_MESSAGE);
+						
 					return;
+				} else if (retValue > 0) {
+					// image matrix has been created in checkHeader by a ImageCreator
+					// reload file
+					m_textPane.setText("");
+					m_textPane.read(new FileReader(m_path), m_path);
 				}
 				
 				setTitle(m_path);

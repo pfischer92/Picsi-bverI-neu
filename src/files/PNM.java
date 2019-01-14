@@ -9,8 +9,11 @@ import main.Picsi;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.RandomAccessFile;
+import java.lang.reflect.Constructor;
 
 import javax.swing.JTextArea;
 
@@ -105,20 +108,46 @@ public class PNM implements IImageFile {
 	/**
 	 * Checks PNM header structure
 	 * @param fileName
-	 * @return true if the format is ASCII
+	 * @return 0: if the format is valid and ASCII; 1: if the header is valid and ASCII and contains creator-tag; -1 wrong header; -2 unknown ImageCreator
 	 */
-	public boolean checkHeader(String fileName) {		
-		RandomAccessFile raf;
-		
+	public int checkHeader(String fileName) {		
 		try {
-			raf = new RandomAccessFile(fileName, "r");
-	
+			RandomAccessFile raf = new RandomAccessFile(fileName, "rw");
+			String s;
+			int retValue = 0;
+			
+			// read header
 			readHeader(raf);
+			
+			// check for creator tag: @package.CreatorClass
+			// the CreatorClass has to implement the interface IImageCreator
+			long pos = raf.getFilePointer(); 
+			do {
+				s = raf.readLine(); 
+				s = s.trim();
+			} while(s.isEmpty());
+			if (s.charAt(0) == '@') {
+				String creatorName = s.substring(1);
+				Class<?> cls = Class.forName(creatorName);
+				Constructor<?> ct = cls.getConstructor();
+				Object o = ct.newInstance();
+				if (o instanceof IImageCreator) {
+					IImageCreator creator = (IImageCreator)o;
+					raf.seek(pos);
+					creator.create(new PrintWriter(new FileWriter(raf.getFD()), true), m_imageType, m_width, m_height, m_maxValue);
+					retValue = 1;
+				} else {
+					retValue = -2;
+				}
+			}
+			
 			raf.close();
 			
-			return m_ascii;
+			return (m_ascii) ? retValue : -1;
+		} catch(ClassNotFoundException ex) {
+			return -2;
 		} catch(Exception ex) {
-			return false;
+			return -1;
 		}
 	}
 	

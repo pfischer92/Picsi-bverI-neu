@@ -92,11 +92,12 @@ public class MainWindow {
 		
 		// create status bar
 		{
+			int dpiY = m_shell.getDisplay().getDPI().y;
 			Composite compo = new Composite(m_shell, SWT.NONE);
 			GridData data = new GridData (SWT.FILL, SWT.BOTTOM, true, false);
 			Font font = m_shell.getFont();
 			FontData[] fd = font.getFontData();
-			data.heightHint = 2*fd[0].getHeight(); //data.heightHint = 15;
+			data.heightHint = 2*fd[0].getHeight()*dpiY/96; //data.heightHint = 15;
 			
 			compo.setLayoutData(data);
 			compo.setCursor(m_display.getSystemCursor(SWT.CURSOR_ARROW));
@@ -679,8 +680,9 @@ public class MainWindow {
 		final int SHOWOUTPUT = 4;
 		final int SHOWCOLORTABLE = 6;
 		final int SHOWHISTOGRAM = 7;
-		final int SHOWPSNR = 8;
-		final int SHOWWAVES = 9;
+		final int SHOWLINE = 8;
+		final int SHOWPSNR = 9;
+		final int SHOWWAVES = 10;
 		
 		MenuItem item = new MenuItem(menuBar, SWT.CASCADE);
 		item.setText("&Window");
@@ -703,6 +705,8 @@ public class MainWindow {
 				menuItems[SHOWCOLORTABLE].setSelection(m_views.hasColorTable());		
 				menuItems[SHOWHISTOGRAM].setEnabled(!m_views.isEmpty());
 				menuItems[SHOWHISTOGRAM].setSelection(m_views.hasHistogram());		
+				menuItems[SHOWLINE].setEnabled(!m_views.isEmpty());
+				menuItems[SHOWLINE].setSelection(m_views.hasLineViewer());						
 				menuItems[SHOWPSNR].setEnabled(!m_views.isEmpty() && m_views.hasSecondView() && m_views.getFirstImageType() == m_views.getSecondImageType() 
 						&& m_views.getView(true).getImageHeight() == m_views.getView(false).getImageHeight()
 						&& m_views.getView(true).getImageWidth() == m_views.getView(false).getImageWidth()
@@ -784,6 +788,19 @@ public class MainWindow {
 			public void widgetSelected(SelectionEvent event) {
 				if (!m_views.isEmpty()) {
 					m_views.toggleHistogram();
+				}
+			}
+		});
+
+		// Window -> Show Line Viewer
+		item = new MenuItem(windowMenu, SWT.CHECK);
+		item.setText("Show &Line...\tCtrl+L");
+		item.setAccelerator(SWT.MOD1 + 'L');
+		item.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent event) {
+				if (!m_views.isEmpty()) {
+					m_views.toggleLineViewer();
 				}
 			}
 		});

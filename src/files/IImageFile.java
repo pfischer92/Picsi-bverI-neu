@@ -4,6 +4,12 @@ import javax.swing.JTextArea;
 
 import org.eclipse.swt.graphics.ImageData;
 
+/**
+ * Image file interface
+ * 
+ * @author Christoph Stamm
+ *
+ */
 public interface IImageFile {
 	/**
 	 * Loads an image file from the file system
