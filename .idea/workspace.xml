@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="369ac0f3-abb9-4aa0-afde-67b5f8b323fb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/IImageFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/files/IImageFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/files/PNM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/files/PNM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/Editor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Editor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/HistogramDlg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/HistogramDlg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/TwinView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/TwinView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Picsi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Picsi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/files/FourierSeries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/files/FourierSeries.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -69,7 +61,7 @@
         <entry file="file://$PROJECT_DIR$/src/imageprocessing/DFT.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="193">
-              <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/src/files/IImageCreator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
-              <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+              <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -89,8 +81,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/files/FourierSeries.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="360">
+              <caret line="24" column="9" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -214,7 +206,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547470804666" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547472534221" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -280,18 +272,18 @@
       <workItem from="1541323391458" duration="56000" />
       <workItem from="1542965959856" duration="5601000" />
       <workItem from="1543999523514" duration="3402000" />
-      <workItem from="1547470562210" duration="241000" />
+      <workItem from="1547470562210" duration="1945000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13016000" />
+    <option name="totallyTimeSpent" value="14720000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="13" y="46" width="1440" height="848" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3004292" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3004292" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -301,7 +293,7 @@
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49570817" visible="true" weight="0.2857143" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49570817" visible="true" weight="0.2857143" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49928468" weight="0.3994709" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -576,7 +568,7 @@
     <entry file="file://$PROJECT_DIR$/src/imageprocessing/DFT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
-          <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -586,14 +578,14 @@
     <entry file="file://$PROJECT_DIR$/src/files/IImageCreator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/files/FourierSeries.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="360">
+          <caret line="24" column="9" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
